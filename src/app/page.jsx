@@ -1,10 +1,22 @@
-
+"use client"
 import Members from "@/components/Members";
 import Navbar from "@/components/Navbar";
 import Profile from "@/components/Profile";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+
+  const [value, setValue]=useState(0)
+// function to handle addition
+  const handleAdd=()=>{
+    setValue(value+1)
+  }
+// function to handle subraction
+  const handleSub=()=>{
+    if(value < 1) return 
+    setValue(value-1)
+  }
 
 
   return (
@@ -28,7 +40,13 @@ export default function Home() {
 
       <Members name="joy" role="nwonye odugwu" bio="A manifesting princess" src="/profile.png"/>
       <Members name="alali" role="go chops" bio="available for deals" src="/joy.jpg"/>
-   
+    
+    
+      <div className="flex gap-x-4 justify-center">
+        <button onClick={handleSub} className="px-3 py-2 bg-red-400 text-white">-</button>
+          <p>{value}</p>
+        <button onClick={handleAdd} className="px-3 py-2 bg-green-400 text-white">+</button>
+      </div>
     </div>
   );
 }
