@@ -14,7 +14,7 @@ const Students = () => {
     <div>
         {students.map(student=>
             (
-                <p>{student.name}</p>
+                <p key={student.id}>{student.name}</p>
             )
         )}
     </div>

@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar'
 import ProductCard from '@/components/ProductCard';
 import Students from '@/components/Students';
+import Todo from '@/components/Todo';
 import { product } from '@/lib/data';
 import React from 'react'
 import { CiLocationOn } from "react-icons/ci";
@@ -18,6 +19,7 @@ export default function Contact() {
       } */}
 
       <Students/>
+      <Todo/>
     </div>
   )
 }
