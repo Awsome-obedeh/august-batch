@@ -12,6 +12,7 @@ export default function Todo() {
     }
 
     const handleOnclick=()=>{
+        if(!work) return 
        setTasks( [...tasks, work])
     }
 
