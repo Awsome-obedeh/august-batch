@@ -1,5 +1,7 @@
 "use client"
 import React, { useState } from 'react'
+
+
 export default function RequestForm() {
 
     const [firstname, setFirstname] = useState('')
@@ -9,19 +11,48 @@ export default function RequestForm() {
     const [phoneNumber, setPhoneNumber] = useState('')
     const [message, setMessage] = useState('')
     const [gender, setGender] = useState('')
-    const [error,setError]=useState('')
+    const [error, setError] = useState('')
 
     console.log("Message:", message)
 
     // /function to handle form submission
-    const handleSubmit=(e)=>{
+    const handleSubmit =async (e) => {
         e.preventDefault()
         console.log(e)
 
-        if(!firstname){
+        if (!firstname) {
             setError('firstname is required')
             console.log("firstname is required")
         }
+        if (!lastname) {
+            setError('lastname is required')
+            console.log("lastname is required")
+        }
+        if (!phoneNumber) {
+            setError('phoneNumber is required')
+            console.log("phoneNumber is required")
+        }
+        if (!message) {
+            setError('message is required')
+            console.log("message is required")
+        }
+        if (!email) {
+            setError('email is required')
+            console.log("email is required")
+        }
+
+      const res=await fetch('/api/mail',{
+        method:"POST",
+        headers:{
+            "content-Type":"application/json"
+        },
+
+        body:JSON.stringify({message,email})
+      })
+      const data=await res.json()
+      console.log(res)
+
+
     }
 
 
@@ -42,16 +73,16 @@ export default function RequestForm() {
                         type="text"
                         placeholder="First Name"
                         className="w-1/2 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
-                        
-                        onChange={(e)=>setFirstname(e.target.value)}
+
+                        onChange={(e) => setFirstname(e.target.value)}
                     />
 
                     <input
                         type="text"
                         placeholder="Last Name"
                         className="w-1/2 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
-                        
-                        onChange={(e)=>setLastname(e.target.value)}
+
+                        onChange={(e) => setLastname(e.target.value)}
                     />
                 </div>
 
@@ -59,9 +90,9 @@ export default function RequestForm() {
                 <input
                     type="email"
                     placeholder="Email Address"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
-                    
-                    onChange={(e)=>{setEmail(e.target.value)}}
+                    className="w-full text-black px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
+
+                    onChange={(e) => { setEmail(e.target.value) }}
                 />
 
                 {/* Phone */}
@@ -69,8 +100,8 @@ export default function RequestForm() {
                     type="tel"
                     placeholder="Phone Number"
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500"
-                    
-                    onChange={(e)=>{setEmail(e.target.value)}}
+
+                    onChange={(e) => { setPhoneNumber(e.target.value) }}
 
 
                 />
@@ -80,8 +111,8 @@ export default function RequestForm() {
                     placeholder="Write your request here..."
                     value={message}
                     className="text-black w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[120px]"
-                    
-                    onChange={(e)=>{setMessage(e.target.value)}}
+
+                    onChange={(e) => { setMessage(e.target.value) }}
 
                 />
 
