@@ -1,8 +1,10 @@
 "use client"
 import Image from 'next/image'
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 export default function Movies() {
+
     const [movies, setMovies] = useState([])
 
     // const movies = [
@@ -90,18 +92,21 @@ export default function Movies() {
         <div className='grid grid-cols-5 grid-rows-5 gap-10 justify-center flex-wrap '>
 
             {
+                movies.length>0 ? 
                 movies.map(movie => (
                     <div className="w-40 bg-gray-600 rounded-md my-4 group " key={movie.id}>
+                        <Link href={`movies/${movie.id}`}>
                         <Image src={movie.image} className=" " width={400} height={500}></Image>
+                        </Link>
 
-                        <div className='hidden group-hover:block'>
+                        <div className=''>
                             <h4>{movie.title}</h4>
                             <p>{movie.genre.join(" ")}</p>
                             <p>{movie.year}</p>
 
                         </div>
                     </div>
-                ))
+                )): (<p>Loading....</p>)
             }
 
 
